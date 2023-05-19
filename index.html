@@ -78,37 +78,32 @@
 
 
     <script>
-        // const gC = new BroadcastChannel('global-chat'),
-        //     msgInp = document.querySelector('.msg'),
-        //     sendBtn = document.querySelector('.send'),
-        //     sendTo = document.querySelector('.sendTo'),
-        //     view = document.querySelector('.view');
+        const gC = new BroadcastChannel('global-chat'),
+            msgInp = document.querySelector('.msg'),
+            sendBtn = document.querySelector('.send'),
+            sendTo = document.querySelector('.sendTo'),
+            view = document.querySelector('.view');
 
-        //     let prmpt =  prompt('Type your email...');
-        //     let reciever ;
-        //     console.log(reciever);
-        // gC.addEventListener('message', (e) => {
-        //     if(e.data.to === prmpt){
-        //         view.insertAdjacentHTML('beforeEnd', `<div class="reciever">${e.data.msg}</div>`)
-        //     }else if (e.data.to === 'all'){
-        //         view.insertAdjacentHTML('beforeEnd', `<div class="reciever">${e.data.msg}</div>`)
-        //     }
-        // })
-
-
-        // sendBtn.addEventListener('click', () => {
-        //     reciever = sendTo.value;
-        //     let data = {from:prmpt , to : reciever , msg:msgInp.value};
-        //     gC.postMessage(data)
-        //     view.insertAdjacentHTML('beforeEnd', `<div class="sender">${msgInp.value}</div>`)
-        // })
-
-        let request = window.indexedDB.open('messages',1);
-            request.onupgradeneeded=(e)=>{
-                console.log(e.target);
+            let prmpt =  prompt('Type your email...');
+            let reciever ;
+            console.log(reciever);
+        gC.addEventListener('message', (e) => {
+            if(e.data.to === prmpt){
+                view.insertAdjacentHTML('beforeEnd', `<div class="reciever">${e.data.msg}</div>`)
+            }else if (e.data.to === 'all'){
+                view.insertAdjacentHTML('beforeEnd', `<div class="reciever">${e.data.msg}</div>`)
             }
+        })
 
-            request.transaction.objectStore('users')
+
+        sendBtn.addEventListener('click', () => {
+            reciever = sendTo.value;
+            let data = {from:prmpt , to : reciever , msg:msgInp.value};
+            gC.postMessage(data)
+            view.insertAdjacentHTML('beforeEnd', `<div class="sender">${msgInp.value}</div>`)
+        })
+
+       
     </script>
 </body>
 
